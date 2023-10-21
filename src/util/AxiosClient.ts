@@ -1,11 +1,12 @@
 import axios from "axios";
 import { auth } from "../firebase";
+import { getUserToken } from "./getToken";
 
 // Axios instance with a base URL
 const instance = axios.create({
   baseURL: "https://localhost:7168/api",
   headers: {
-    Authorization: `Bearer ${auth.currentUser?.getIdToken()}}`,
+    Authorization: `Bearer ${getUserToken}}`,
   },
 });
 
