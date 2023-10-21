@@ -3,16 +3,18 @@ import { auth } from "./firebase";
 import { User } from "firebase/auth";
 import axios from "axios";
 import { getUserToken } from "./util/getToken";
+import { useForm, SubmitHandler } from "react-hook-form"
 
-interface Employee {
+interface Schedule {
   id: number;
   name: string;
   // Define other properties here if necessary
 }
 
 const Protected = () => {
+  const {register,handleSubmit} = useForm();
   const [user, setUser] = useState<User | null>(null);
-  const [employees, setEmployees] = useState<Employee[]>([]); // Specify the type here
+  const [employees, setEmployees] = useState<Schedule[]>([]); // Specify the type here
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -43,18 +45,27 @@ const Protected = () => {
     };
   }, []);
 
+  const onSubmit = (data:any) => console.log(data)
+
   if (!user) {
     return <div>You must be logged in to view this page.</div>;
   }
 
   return (
     <div>
-      <h1>Employees</h1>
-      <ul>
-        {employees.map((employee, i) => (
-          <li key={i}>hej</li>
-        ))}
-      </ul>
+      <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-600">Start Time</label>
+                <input type="date" {...register("start")} id="startTime" name="start" className="mt-1 p-2 w-full border rounded-md"/>
+            </div>
+
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-600">End Time</label>
+                <input type="date" id="endTime" {...register("end")} name="end" className="mt-1 p-2 w-full border rounded-md"/>
+            </div>
+            <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create Schedule</button>
+        </form>
+     
     </div>
   );
 };
