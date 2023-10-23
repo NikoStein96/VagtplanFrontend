@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./globals.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Protected from "./Protected.tsx";
 import Layout from "./layout/Layout.tsx";
 import Login from "./pages/Login.tsx";
 import Schedules from "./pages/Schedules.tsx";
+import Schedule from "./pages/Schedule.tsx";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 const router = createBrowserRouter([
@@ -31,10 +31,10 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/protected",
+    path: "schedules/:id",
     element: (
       <Layout>
-        <Protected />
+        <Schedule />
       </Layout>
     ),
   },

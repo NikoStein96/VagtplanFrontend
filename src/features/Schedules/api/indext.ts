@@ -18,4 +18,12 @@ const createSchedule = async ({
   return schedules.data;
 };
 
-export { getSchedules, createSchedule };
+const getSchedule = async ({ queryKey }:any) => {
+  const [_, id] = queryKey
+  const schedules = await axios.get(`/Schedule/${id}`);
+
+  return schedules.data;
+};
+
+
+export { getSchedules, createSchedule, getSchedule };

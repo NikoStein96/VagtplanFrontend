@@ -9,4 +9,5 @@ export interface Day {
   id: number;
   shifts: any;
   scheduleId: number;
+  dayDate: string;
 }
