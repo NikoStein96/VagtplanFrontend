@@ -1,5 +1,5 @@
-import { Schedule } from "./types";
-import { useNavigate } from "react-router-dom";
+import { Schedule } from "../types";
+import { Link, useNavigate } from "react-router-dom";
 
 interface SchedulesListProps {
   schedules: Schedule[];
@@ -26,7 +26,10 @@ function SchedulesList({ schedules }: SchedulesListProps) {
         <tbody>
           {schedules.map((schedule) => {
             return (
-              <tr onClick={() => navigate(`schedule/${schedule.id}`)} className="bg-white border-b cursor-pointer">
+              <tr
+                onClick={() => navigate(`${schedule.id}`)}
+                className="bg-white border-b cursor-pointer"
+              >
                 <td
                   scope="row"
                   className="px-6 py-4 font-medium  whitespace-nowrap "

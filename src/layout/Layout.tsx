@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import { IconLayoutDashboard, IconCalendarStats } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,12 +20,14 @@ function Layout({ children }: LayoutProps) {
                   Overview
                 </a>
               </div>
-              <div className="flex flex-1 items-center gap-2  p-2">
-                <IconCalendarStats className="text-gray-500" size={20} />
-                <a className="text-gray-500 " href="/">
-                  Schedules
-                </a>
-              </div>
+              <Link to="/schedules">
+                <div className="flex flex-1 items-center gap-2  p-2">
+                  <IconCalendarStats className="text-gray-500" size={20} />
+                  <a className="text-gray-500 " href="/">
+                    Schedules
+                  </a>
+                </div>
+              </Link>
             </nav>
           </div>
         </aside>
