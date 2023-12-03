@@ -9,11 +9,9 @@ function CreateSchedule() {
   const { mutate } = useCreateSchedule();
   const [open, setOpen] = useState(false);
 
-  const wait = () => new Promise((resolve) => setTimeout(resolve, 500));
-
   const onSubmit = (data: any) => {
     mutate(data);
-    wait().then(() => setOpen(false));
+    setOpen(false);
   };
 
   return (

@@ -27,6 +27,7 @@ function SchedulesList({ schedules }: SchedulesListProps) {
           {schedules.map((schedule) => {
             return (
               <tr
+                key={schedule.id}
                 onClick={() => navigate(`${schedule.id}`)}
                 className="bg-white border-b cursor-pointer"
               >

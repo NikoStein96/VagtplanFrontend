@@ -1,82 +1,76 @@
 import React, { useState } from "react";
 import useSchedule from "../features/Schedules/hooks/useSchedule";
 import { useParams } from "react-router-dom";
+import { Day } from "../features/Schedules/types";
 import dayjs from "dayjs";
 
 function Schedule() {
   let { id } = useParams();
   const { data } = useSchedule(id!);
-  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const [currentMonth, setCurrentMonth] = useState(dayjs());
+  const users = ["John", "Jane", "Doe"];
 
-  const getDaysArray = () => {
-    const firstDayOfMonth = currentMonth.startOf("month");
-    const firstDayOfWeek =
-      firstDayOfMonth.day() === 1
-        ? firstDayOfMonth
-        : firstDayOfMonth.subtract(firstDayOfMonth.day() - 1, "day");
-    const daysArray = Array.from({ length: 42 }, (_, i) =>
-      firstDayOfWeek.add(i, "day")
-    );
-    return daysArray;
+  // State for pagination
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 7;
+
+  // Handlers for next and previous week
+  const handleNextWeek = () => {
+    if (data && currentPage < data.days.length / itemsPerPage - 1) {
+      setCurrentPage((current) => current + 1);
+    }
   };
 
-  const handleNextMonth = () => {
-    setCurrentMonth(currentMonth.add(1, "month"));
+  const handlePrevWeek = () => {
+    setCurrentPage((current) => Math.max(current - 1, 0));
   };
 
-  const handlePrevMonth = () => {
-    setCurrentMonth(currentMonth.subtract(1, "month"));
+  // Calculate slice of days for current page
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const daysToDisplay = data?.days.slice(startIndex, endIndex);
+
+  const fillEmptySlots = (days: Day[]) => {
+    const filledDays = [...days];
+    while (filledDays.length < itemsPerPage) {
+      filledDays.push({} as Day); // Adding an empty object or specific structure
+    }
+    return filledDays;
   };
 
-  if (data) {
-    const isDayInSchedule = (day: dayjs.Dayjs) => {
-      const dayString = day.format("YYYY-MM-DD");
-      console.log(dayString, day);
-      return data.days.some((scheduleDay) => scheduleDay.dayDate === dayString);
-    };
+  const filledDaysToDisplay = fillEmptySlots(daysToDisplay || []);
 
-    return (
-      <div className="p-4">
-        <div className="flex justify-between mb-4">
-          <button
-            onClick={handlePrevMonth}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Previous
-          </button>
-          <span>{currentMonth.format("MMMM YYYY")}</span>
-          <button
-            onClick={handleNextMonth}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Next
-          </button>
-        </div>
-        <div className="grid grid-cols-7 gap-2">
-          {weekDays.map((day) => {
-            return (
-              <div className="text-center py-2 rounded text-black">{day}</div>
-            );
-          })}
-
-          {getDaysArray().map((day, index) => {
-            const isInSchedule = isDayInSchedule(day);
-            return (
-              <div
-                key={index}
-                className={`text-center py-2 rounded ${
-                  isInSchedule ? "bg-gray-200" : "bg-gray-500"
-                }`}
-              >
-                {day.date()}
-              </div>
-            );
-          })}
-        </div>
+  return (
+    <div className="p-4 h-full">
+      <div>
+        <button onClick={handlePrevWeek}>Back</button>
+        <button onClick={handleNextWeek}>Next</button>
       </div>
-    );
-  } else return null;
+      <div className="grid grid-cols-8 h-full grid-rows-[50px_auto] overflow-y-auto">
+        <div className="border"></div>
+        {filledDaysToDisplay.map((day) => {
+          return (
+            <div
+              key={day.id}
+              className="border flex justify-center items-center"
+            >
+              {day.dayDate ? dayjs(day.dayDate).format("ddd DD") : null}
+            </div>
+          );
+        })}
+
+        {users.map((user, i) => (
+          <React.Fragment key={user}>
+            <div className="border">{user}</div>
+            {filledDaysToDisplay?.map((day) => (
+              <div key={day.dayDate} className="border cursor-pointer">
+                yep
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default Schedule;

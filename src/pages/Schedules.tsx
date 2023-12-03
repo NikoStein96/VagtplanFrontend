@@ -3,9 +3,9 @@ import CreateSchedule from "../features/Schedules/components/CreateSchedule";
 import useSchedules from "../features/Schedules/hooks/useSchedules";
 
 function Schedules() {
-  const { data, isFetching } = useSchedules();
+  const { data, isLoading } = useSchedules();
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <div role="status">
         <svg

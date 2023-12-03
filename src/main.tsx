@@ -9,6 +9,8 @@ import Schedules from "./pages/Schedules.tsx";
 import Schedule from "./pages/Schedule.tsx";
 import { QueryClientProvider, QueryClient } from "react-query";
 
+const queryClient = new QueryClient();
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>
   </React.StrictMode>
