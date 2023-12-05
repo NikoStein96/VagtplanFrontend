@@ -5,8 +5,9 @@ import { Link, useLocation } from "react-router-dom";
 function Sidebar() {
   const { pathname } = useLocation();
   const links = [
-    { title: "Overview", path: "/" },
+    { title: "Overview", path: "/dashboard" },
     { title: "Schedules", path: "/schedules" },
+    { title: "Organisation", path: "/organisation" },
   ];
 
   const isActive = (path: string) => {
@@ -19,7 +20,9 @@ function Sidebar() {
   return (
     <aside className="border-r-2 flex flex-col items-start">
       <div className="mt-2 p-5 w-full">
-        <h1 className="uppercase text-4xl mb-10">Plan-It</h1>
+        <Link to="/dashboard">
+          <h1 className="uppercase text-4xl mb-10">Plan-It</h1>
+        </Link>{" "}
         <nav className="flex flex-col gap-3">
           {links.map((link) => {
             return (

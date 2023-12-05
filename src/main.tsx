@@ -8,6 +8,10 @@ import Login from "./pages/Login.tsx";
 import Schedules from "./pages/Schedules.tsx";
 import Schedule from "./pages/Schedule.tsx";
 import { QueryClientProvider, QueryClient } from "react-query";
+import Home from "./pages/Home.tsx";
+import MarketingLayout from "./layout/MarketingLayout.tsx";
+import Register from "./pages/Register.tsx";
+import Organisation from "./pages/Organisation.tsx";
 
 const queryClient = new QueryClient();
 
@@ -15,14 +19,42 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
+      <MarketingLayout>
+        <Home />
+      </MarketingLayout>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
       <Layout>
         <App />
       </Layout>
     ),
   },
   {
+    path: "/organisation",
+    element: (
+      <Layout>
+        <Organisation />
+      </Layout>
+    ),
+  },
+  {
     path: "/login",
-    element: <Login />,
+    element: (
+      <MarketingLayout>
+        <Login />
+      </MarketingLayout>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <MarketingLayout>
+        <Register />
+      </MarketingLayout>
+    ),
   },
   {
     path: "/schedules",
