@@ -64,7 +64,7 @@ function EmployeeSchedule() {
           );
         })}
 
-        {users.map((user, i) => (
+        {users.map((user) => (
           <React.Fragment key={user}>
             <div className="border">{user}</div>
             {filledDaysToDisplay?.map((day) => (

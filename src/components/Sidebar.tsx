@@ -1,4 +1,4 @@
-import { IconCalendarStats, IconLayoutDashboard } from "@tabler/icons-react";
+import { IconLayoutDashboard } from "@tabler/icons-react";
 import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 

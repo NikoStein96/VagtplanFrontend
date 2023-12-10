@@ -3,15 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateEmployee } from "@/features/Authentication/mutations/useCreateEmployee";
 import { auth } from "@/firebase";
-import React from "react";
 import { useForm } from "react-hook-form";
 
 function CreateEmployee() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { mutateAsync } = useCreateEmployee();
 

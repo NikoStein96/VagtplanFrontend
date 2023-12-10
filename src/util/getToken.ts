@@ -1,7 +1,7 @@
 import { auth } from "../firebase";
 
 const getUserToken = async () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const unsub = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const token = await user.getIdToken();
