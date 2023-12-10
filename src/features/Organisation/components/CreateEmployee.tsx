@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateEmployee } from "@/features/Authentication/mutations/useCreateEmployee";
+import { auth } from "@/firebase";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -17,7 +18,11 @@ function CreateEmployee() {
   const onSubmit = async (data: any) => {
     const { email, name } = data;
     try {
-      await mutateAsync({ name, email } as any);
+      await mutateAsync({
+        firebaseId: auth.currentUser?.uid,
+        name,
+        email,
+      } as any);
     } catch (error) {
       console.error("Registration error", error);
     }

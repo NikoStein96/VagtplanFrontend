@@ -1,6 +1,11 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createEmployee } from "../api";
 
 export const useCreateEmployee = () => {
-  return useMutation(createEmployee);
+  const queryClient = useQueryClient();
+  return useMutation(createEmployee, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("employees");
+    },
+  });
 };

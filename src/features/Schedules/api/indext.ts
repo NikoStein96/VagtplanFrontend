@@ -18,12 +18,27 @@ const createSchedule = async ({
   return schedules.data;
 };
 
-const getSchedule = async ({ queryKey }:any) => {
-  const [_, id] = queryKey
+const getSchedule = async ({ queryKey }: any) => {
+  const [_, id] = queryKey;
   const schedules = await axios.get(`/Schedule/${id}`);
 
   return schedules.data;
 };
 
+const updateDay = async ({ day, firebaseId, scheduleId }: any) => {
+  const updatedDay = await axios.put(`/Schedule/UpdateAvailableEmployees`, {
+    day,
+    firebaseId,
+    scheduleId,
+  });
+  return updatedDay.data;
+};
 
-export { getSchedules, createSchedule, getSchedule };
+const generateShifts = async ({ id }: any) => {
+  const updatedDay = await axios.put(
+    `/Schedule/UpdateShiftDraft?scheduleid=${id}`
+  );
+  return updatedDay.data;
+};
+
+export { getSchedules, createSchedule, getSchedule, updateDay, generateShifts };

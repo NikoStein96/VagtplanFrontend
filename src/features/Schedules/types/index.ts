@@ -10,4 +10,5 @@ export interface Day {
   shifts: any;
   scheduleId: number;
   dayDate: string;
+  availableEmployees: any;
 }
