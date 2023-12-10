@@ -29,14 +29,12 @@ function Schedules() {
     );
   }
 
-  if (data) {
-    return (
-      <div>
-        <CreateSchedule />
-        <SchedulesList schedules={data} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <CreateSchedule />
+      <SchedulesList schedules={data} />
+    </div>
+  );
 }
 
 export default Schedules;

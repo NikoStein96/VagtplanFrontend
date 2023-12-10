@@ -2,7 +2,7 @@ import { Schedule } from "../types";
 import { useNavigate } from "react-router-dom";
 
 interface SchedulesListProps {
-  schedules: Schedule[];
+  schedules: Schedule[] | undefined;
 }
 
 function SchedulesList({ schedules }: SchedulesListProps) {
@@ -24,7 +24,7 @@ function SchedulesList({ schedules }: SchedulesListProps) {
           </tr>
         </thead>
         <tbody>
-          {schedules.map((schedule) => {
+          {schedules?.map((schedule) => {
             return (
               <tr
                 key={schedule.id}
