@@ -7,13 +7,11 @@ const getSchedules = async () => {
   return schedules.data;
 };
 
-const createSchedule = async ({
-  startTime,
-  endTime,
-}: Pick<Schedule, "startTime" | "endTime">) => {
+const createSchedule = async ({ startTime, endTime, orgId }: any) => {
   const schedules = await axios.post("/Schedule", {
     startTime,
     endTime,
+    orgId,
   });
   return schedules.data;
 };
