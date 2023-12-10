@@ -3,13 +3,16 @@ import Button from "../../../components/Button";
 import { useForm } from "react-hook-form";
 import useCreateSchedule from "../mutations/useCreateSchedule";
 import { useState } from "react";
+import useEmployeeProfile from "@/features/Employees/hooks/useEmployeeProfile";
 
 function CreateSchedule() {
   const { register, handleSubmit } = useForm();
   const { mutate } = useCreateSchedule();
   const [open, setOpen] = useState(false);
+  const { data: profile } = useEmployeeProfile();
 
   const onSubmit = (data: any) => {
+    data.orgId = profile?.organisationId;
     mutate(data);
     setOpen(false);
   };
