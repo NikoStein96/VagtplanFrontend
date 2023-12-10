@@ -11,7 +11,7 @@ const createSchedule = async ({
   startTime,
   endTime,
 }: Pick<Schedule, "startTime" | "endTime">) => {
-  const schedules = await axios.post("/Schedule/createSchedule", {
+  const schedules = await axios.post("/Schedule", {
     startTime,
     endTime,
   });
