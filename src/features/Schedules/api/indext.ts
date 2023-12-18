@@ -1,5 +1,4 @@
 import axios from "../../../util/AxiosClient";
-import { Schedule } from "../types";
 
 const getSchedules = async () => {
   const schedules = await axios.get("/Schedule");
