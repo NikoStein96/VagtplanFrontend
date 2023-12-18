@@ -81,7 +81,9 @@ function EmployeeSchedule() {
               >
                 {day.availableEmployees?.find((shift: any) => {
                   console.log(shift);
-                  return shift.firebaseId === profile?.firebaseId;
+                  return (
+                    shift.firebaseId === profile?.firebaseId && day.dayDate
+                  );
                 })
                   ? "Yes"
                   : "No"}

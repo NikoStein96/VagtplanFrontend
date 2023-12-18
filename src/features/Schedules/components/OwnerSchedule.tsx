@@ -43,6 +43,7 @@ function OwnerSchedule() {
   };
 
   const filledDaysToDisplay = fillEmptySlots(daysToDisplay || []);
+  console.log(filledDaysToDisplay);
 
   const filtered_employees = employees?.filter(
     (employee: any) => employee.role == 1
@@ -71,13 +72,20 @@ function OwnerSchedule() {
           <React.Fragment key={user.firebaseId}>
             <div className="border">{user.email}</div>
             {filledDaysToDisplay?.map((day) => (
-              <div key={day.dayDate} className="border">
-                {day.availableEmployees?.find((shift: any) => {
-                  console.log(shift);
-                  return shift.firebaseId === user.firebaseId;
-                })
-                  ? "Yes"
-                  : "No"}
+              <div key={day.dayDate} className="border flex flex-col">
+                {Object.keys(day).length !== 0
+                  ? day.availableEmployees?.find((shift: any) => {
+                      return shift.firebaseId === user.firebaseId;
+                    })
+                    ? "Yes"
+                    : "No"
+                  : null}
+
+                {day.shifts?.find((shift: any) => {
+                  return shift.employeeId === user.firebaseId;
+                }) ? (
+                  <div className="bg-green-500 w-full h-full"></div>
+                ) : null}
               </div>
             ))}
           </React.Fragment>
